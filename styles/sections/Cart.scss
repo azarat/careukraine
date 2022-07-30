@@ -1,0 +1,171 @@
+.section {
+    &--cart {
+        padding-top: 80px;
+        background: #F0F0F0;
+        min-height: 100vh;
+    }
+}
+
+.cart {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+
+    &__item {
+        position: relative;
+        min-height: 33vh;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    
+        &__info {
+            background: #ffffff;
+            padding: 8px 12px;
+
+            &--name {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+                margin-bottom: 22px;
+                text-transform: uppercase;
+                color: #000000;
+            }
+
+            &--price {
+                font-weight: 400;
+                font-size: 22px;
+                line-height: 26px;
+                color: #000000;
+
+                span {
+                    color: #818181;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 22px;
+                }
+            }
+
+            &--size {
+                background: #C4C4C4;
+                padding: 5px 10px;
+                display: flex;
+                margin-top: 10px;
+
+                &__label {
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 22px;
+                    color: #818181;
+                    width: 40%;
+                }
+
+                &__content {
+                    margin-left: 10px;
+                    border-left: 1px solid #ffffff;
+                    border-right: 1px solid #ffffff;
+                    padding: 0px 15px;
+                }
+            }
+
+            &--quantity {
+                background: #C4C4C4;
+                padding: 5px 10px;
+                display: flex;
+                margin-top: 5px;
+
+                &__label {
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 22px;
+                    color: #818181;
+                    width: 40%;
+                }
+
+                &__content {
+                    display: flex;
+
+                    button {
+                        border: none;
+                        background: none;
+                        width: 25px;
+                    }
+
+                    input {
+                        width: 35px;
+                        text-align: center;
+                        border: none;
+                        border-radius: 0px;
+                    }
+                }
+            }
+
+            &--subtotal {
+                background: #C4C4C4;
+                padding: 5px 10px;
+                display: flex;
+                margin-top: 5px;
+                align-items: center;
+
+                &__label {
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 22px;
+                    color: #818181;
+                    width: 40%;
+                }
+
+                &__content {
+                    padding: 0px 15px;
+                    margin-left: 7px;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 17px;
+                }
+            }
+        }
+
+        &__image {
+            position: relative;
+        }
+    }
+
+    &__total {
+        background: #C4C4C4;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        padding: 7px 10px;
+        align-items: center;
+
+        &__label {
+            color: #818181;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+        }
+
+        &__value {
+            text-align: center;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: #000000;
+        }
+    }
+
+    &__checkout {
+        background: #3EDBFE;
+        height: 55px;
+        border: 4px solid #3EDBFE;
+        text-transform: uppercase;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+    }
+}

@@ -22,4 +22,21 @@
     &__goback {
         padding-right: 35px;
     }
+
+    &__title {
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 26px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        margin-right: 30px;
+    }
+
+    &--checkout {
+        .header__logo {
+            flex: 1;
+            text-align: center;
+            padding-right: 40px;
+        }
+    }
 }
