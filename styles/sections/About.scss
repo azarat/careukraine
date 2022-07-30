@@ -1,0 +1,22 @@
+.section {
+    &--about {
+        height: 100vh;
+        background: #000000 url('/images/sec2_bg.jpg');
+        background-size: cover;
+        background-position: center right;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 21px;
+
+        p {
+            color: #ffffff;
+            font-size: 24px;
+            line-height: 35px;
+            font-weight: 300;
+            margin: 0px 0px 40% 0px;
+            letter-spacing: 1px;
+        }
+    }
+  }

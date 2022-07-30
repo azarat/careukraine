@@ -24,3 +24,16 @@ a {
     background: black;
   }
 }
+
+.container {
+  position: relative;
+  padding: 0px 25px;
+
+  &--main {
+    position: relative;
+  }
+  &--section {
+    position: relative;
+  }
+}
+
