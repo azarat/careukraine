@@ -1,6 +1,7 @@
 import LogoSVG from './svg/Logo.svg';
 import CartSVG from './svg/Cart.svg';
 import ChevronLeft2SVG from './svg/ChevronLeft2.svg'
+import { useRouter } from 'next/router'
 
 interface HeaderProps {
   goBack?: boolean
@@ -9,12 +10,14 @@ interface HeaderProps {
 }
 
 const Header = ({ goBack, hideCart, title }: HeaderProps) => {
+  const router = useRouter()
+
   return (
     <header className={`header${
       ((!!goBack && goBack == true) && (!!hideCart && hideCart == true) && !title) ? ' header--checkout' : ''
     }`}>
       {(!!goBack && goBack == true) &&
-        <div className='header__goback'>
+        <div className='header__goback' onClick={() => router.back()}>
           <ChevronLeft2SVG />
         </div>
       }
@@ -23,12 +26,12 @@ const Header = ({ goBack, hideCart, title }: HeaderProps) => {
         <div className='header__title'>{title}</div>
       }
 
-      <div className='header__logo'>
+      <div className='header__logo' onClick={() => router.push('/')}>
         <LogoSVG />
       </div>
 
       {hideCart !== true &&
-        <div className='header__cart'>
+        <div className='header__cart' onClick={() => router.push('/cart')}>
           <CartSVG />
         </div>
       }

@@ -1,12 +1,13 @@
 import ProductsItem from "./ProductsItem"
+import { _products } from "../../data/products.json"
 
 const Products = () => {
+
     return (
         <div className='container products'>
-            <ProductsItem />
-            <ProductsItem />
-            <ProductsItem />
-            <ProductsItem />
+            {_products.map((p) =>
+                <ProductsItem product={p} key={p.alias} />
+            )}
         </div>
     )
 }

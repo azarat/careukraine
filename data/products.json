@@ -1,0 +1,79 @@
+{
+    "_products": [
+        {
+            "alias": "product1",
+            "name": "T-shirt \"Care Ukraine\" 1",
+            "price": 500,
+            "images": [
+                {
+                    "main": true,
+                    "url": "/images/main-img.jpg"
+                },
+                {
+                    "main": false,
+                    "url": "/images/main-img.jpg"
+                },
+                {
+                    "main": false,
+                    "url": "/images/main-img.jpg"
+                }
+            ],
+            "sizes": ["xs", "s", "m", "l", "xl", "xxl", "xxxl", "xxxxl"],
+            "description": "T-shirt is made of high quality cotton fabric, with the addition of elastane.",
+            "features": {
+                "contains": "cotton - 95%, elastane - 5%",
+                "care": "machine wash cool"
+            }
+        },
+        {
+            "alias": "product2",
+            "name": "T-shirt \"Care Ukraine\" 2",
+            "price": 50,
+            "images": [
+                {
+                    "main": true,
+                    "url": "/images/main-img.jpg"
+                },
+                {
+                    "main": false,
+                    "url": "/images/main-img.jpg"
+                },
+                {
+                    "main": false,
+                    "url": "/images/main-img.jpg"
+                }
+            ],
+            "sizes": ["xs", "s", "m", "l", "xl", "xxl", "xxxl", "xxxxl"],
+            "description": "T-shirt is made of high quality cotton fabric, with the addition of elastane.",
+            "features": {
+                "contains": "cotton - 95%, elastane - 5%",
+                "care": "machine wash cool"
+            }
+        },
+        {
+            "alias": "product3",
+            "name": "T-shirt \"Care Ukraine\" 3",
+            "price": 50,
+            "images": [
+                {
+                    "main": true,
+                    "url": "/images/main-img.jpg"
+                },
+                {
+                    "main": false,
+                    "url": "/images/main-img.jpg"
+                },
+                {
+                    "main": false,
+                    "url": "/images/main-img.jpg"
+                }
+            ],
+            "sizes": ["xs", "s", "m", "l", "xl", "xxl", "xxxl", "xxxxl"],
+            "description": "T-shirt is made of high quality cotton fabric, with the addition of elastane.",
+            "features": {
+                "contains": "cotton - 95%, elastane - 5%",
+                "care": "machine wash cool"
+            }
+        }
+    ]
+}
