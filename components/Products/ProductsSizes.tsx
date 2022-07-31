@@ -1,16 +1,17 @@
-const ProductsSizes = () => {
+interface ProductsSizesProps {
+    sizes: string[]
+    onClick: (size: string) => void
+    currentSize: string
+}
+
+const ProductsSizes = ({ sizes, onClick, currentSize }: ProductsSizesProps) => {
     return (
         <div className="product-sizes">
             <div className="product-sizes__label">SIZE</div>
             <div className="product-sizes__items">
-                <div className="product-sizes__item">xs</div>
-                <div className="product-sizes__item">s</div>
-                <div className="product-sizes__item">m</div>
-                <div className="product-sizes__item">l</div>
-                <div className="product-sizes__item">xl</div>
-                <div className="product-sizes__item">xxl</div>
-                <div className="product-sizes__item">xxxl</div>
-                <div className="product-sizes__item">xxxxl</div>
+                {!!sizes && sizes.length && sizes.map((size) =>
+                    <div className={`product-sizes__item${currentSize == size ? " active" : ""}`} onClick={() => onClick(size)}>{size}</div>
+                )}
             </div>
         </div>
     )

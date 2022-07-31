@@ -18,7 +18,7 @@
                     "url": "/images/main-img.jpg"
                 }
             ],
-            "sizes": ["xs", "s", "m", "l", "xl", "xxl", "xxxl", "xxxxl"],
+            "sizes": ["xs", "s", "xxl", "xxxl", "xxxxl"],
             "description": "T-shirt is made of high quality cotton fabric, with the addition of elastane.",
             "features": {
                 "contains": "cotton - 95%, elastane - 5%",

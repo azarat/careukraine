@@ -1,21 +1,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-
-declare type ProductImagesType = {
-    url: string
-    main: boolean
-}
-
-declare type ProductType = {
-    name: string
-    alias: string
-    price: number
-    description: string
-    sizes: string[]
-    features: object
-    images: ProductImagesType[]
-}
+import { ProductType } from '../../types/types'
 
 interface ProductProps {
     product: ProductType

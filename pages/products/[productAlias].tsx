@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../../components/Header'
@@ -6,10 +7,32 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import ProductImageSlider from '../../components/ProductImageSlider/ProductImageSlider'
 import ProductsSizes from '../../components/Products/ProductsSizes'
+import Loader from '../../components/Loader'
+import { ProductType } from '../../types/types'
+import { _products } from "../../data/products.json"
 
 const Product: NextPage = () => {
   const router = useRouter()
-  const { product } = router.query
+  const { productAlias } = router.query
+  const [product, setProduct] = useState<ProductType | null>(null)
+  const [size, setSize] = useState<string>("")
+
+  useEffect(()=>{
+    const productsMatch = _products.filter((p) => p.alias == productAlias)
+    if (productsMatch.length) setProduct(productsMatch[0])
+  }, [productAlias])
+
+  const addToBag = () => {
+    
+  }
+
+  if (product == null) {
+    return (
+        <>
+            <Loader />
+        </>
+    )
+  }
 
   return (
     <>
@@ -38,32 +61,35 @@ const Product: NextPage = () => {
 
                 <div className='product'>
                     <div className='product--image'>
-                        <ProductImageSlider />
+                        <ProductImageSlider images={product.images} />
                     </div>
 
                     <div className='product--info'>
                         <div className='product--info__name'>
-                            T-shirt "Care Ukraine"
+                            {product.name}
                         </div>
                         <div className='product--info__price'>
-                            $50
+                            ${product.price}
                         </div>
                         <div className='product--info__sizes'>
-                            <ProductsSizes />
+                            <ProductsSizes 
+                                sizes={product.sizes} 
+                                onClick={size => setSize(size)} 
+                                currentSize={size} />
                         </div>
                         <div className='product--info__button'>
-                            <button className='product--add-to-cart'>Add to bag</button>
+                            <button className='product--add-to-cart' onClick={addToBag}>Add to bag</button>
                         </div>
                         <div className='product--info__description'>
                             <span className='product--info__description--label'>Description</span>
-                            <p>T-shirt is made of high quality cotton fabric, with the addition of elastane.</p>
+                            <p>{product.description}</p>
                         </div>
                         <div className='product--info__features'>
                             <div className='product--info__feature'>
-                                <span className='product--info__feature--label'>Contains:</span> cotton - 95%, elastane - 5%
+                                <span className='product--info__feature--label'>Contains:</span> {product.features.contains}
                             </div>
                             <div className='product--info__feature'>
-                                <span className='product--info__feature--label'>Care:</span> machine wash cool
+                                <span className='product--info__feature--label'>Care:</span> {product.features.care}
                             </div>
                             <div className='product--info__feature'>
                                 <span className='product--info__feature--label'>Free shipping</span>

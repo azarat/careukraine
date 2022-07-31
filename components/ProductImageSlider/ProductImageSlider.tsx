@@ -2,8 +2,13 @@ import Slider from "react-slick";
 import ProductImageSliderItem from './ProductImageSliderItem'
 import ChevronLeftSVG from '../svg/ChevronLeft.svg'
 import ChevronRightSVG from '../svg/ChevronRight.svg'
+import { ProductImagesType } from '../../types/types'
 
-const ProductImageSlider = () => {
+interface ProductImageSliderProps {
+    images: ProductImagesType[]
+}
+
+const ProductImageSlider = ({ images }: ProductImageSliderProps) => {
 
     const NextArrow = (props: any) => {
         const { className, style, onClick } = props;
@@ -36,13 +41,13 @@ const ProductImageSlider = () => {
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
     };
-    
+
     return (
         <Slider {...settings} className="product-image-slider">
 
-            <ProductImageSliderItem />
-            <ProductImageSliderItem />
-            <ProductImageSliderItem />
+            {!!images && images.length && images.map((img) => 
+                <ProductImageSliderItem image={img} key={img.url} />
+            )}
 
         </Slider>
     )
