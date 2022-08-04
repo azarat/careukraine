@@ -1,11 +1,23 @@
 import type { NextPage } from 'next'
+import { useEffect, useState } from "react";
 import Head from 'next/head'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Image from 'next/image'
 import Products from '../components/Products/Products'
+import { SET_CART, GET_CART, ERROR } from "../store/types";
+import { connect } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData, setCartData } from "../store/actions/cartAction";
+import { Dispatch } from 'redux';
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ setCart, cartData, cart }: any) => {
+  const [ cartItems, setCartItems ] = useState();
+
+  useEffect(() => {
+    setCartItems(cart)
+  }, [cart]);
+  
   return (
     <>
       <Head>
@@ -22,7 +34,10 @@ const Home: NextPage = () => {
         </section>
 
         <section className='container--section section--about'>
-          <p>
+          <p onClick={() => {
+            setCart([1,1,2, 121])
+          }}>
+            {JSON.stringify(cartItems)}
             Care Ukraine<br />
             - This is a project, <br />
             the profit from which will go <br />
@@ -43,4 +58,21 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+function mapStateToProps(store: any) {
+  const { cartData } = store;
+  return { cart: cartData.cart };
+}
+ 
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    getCart: () => dispatch({
+      type: GET_CART
+    }),
+    setCart: (data: any) => dispatch({
+      type: SET_CART,
+      payload: data,
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Home)
