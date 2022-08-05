@@ -4,11 +4,25 @@
         background: #000000 url('/images/sec2_bg.jpg');
         background-size: cover;
         background-position: center right;
-
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0px 21px;
+
+        @media screen and (min-width: 768px) {
+            background: #000000 url('/images/sec2_bg-xs.jpg');            
+            background-size: contain;
+        }
+
+        @media screen and (min-width: 1200px) {
+            background: #000000 url('/images/sec2_bg-xl.jpg');            
+            background-size: contain;
+        }
+
+        @media screen and (min-width: 1920px) {
+            background: #000000 url('/images/sec2_bg-xxl.jpg');            
+            background-size: contain;
+        }
 
         p {
             color: #ffffff;
@@ -17,6 +31,11 @@
             font-weight: 300;
             margin: 0px 0px 40% 0px;
             letter-spacing: 1px;
+
+            @media screen and (min-width: 768px) {
+                text-align: center;
+                margin-bottom: 10%;
+            }
         }
     }
   }

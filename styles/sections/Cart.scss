@@ -11,16 +11,39 @@
     grid-template-columns: 1fr;
     gap: 3px;
 
+    @media screen and (min-width: 768px) {
+        gap: 5px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        width: 416px;
+        margin: 0 auto;
+    }
+        
     &__item {
         position: relative;
         min-height: 33vh;
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 2fr;
+
+        @media screen and (min-width: 768px) {
+            padding-right: 50%;
+            background: #ffffff;
+        }
+
+        @media screen and (min-width: 1200px) {
+            padding: 0px;
+            width: 416px;
+        }
     
         &__info {
             background: #ffffff;
             padding: 8px 12px;
+
+            @media screen and (min-width: 768px) {
+                padding-right: 0px;
+            }
 
             &--name {
                 font-weight: 400;
@@ -137,6 +160,16 @@
         padding: 7px 10px;
         align-items: center;
 
+        @media screen and (min-width: 768px) {
+            width: 50%;
+            margin-top: 10px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            margin: 10px auto 0;
+            width: 416px;
+        }
+
         &__label {
             color: #818181;
             font-weight: 400;
@@ -167,5 +200,14 @@
         font-weight: 400;
         font-size: 20px;
         line-height: 24px;
+
+        @media screen and (min-width: 768px) {
+            width: 50%;
+        }
+
+        @media screen and (min-width: 1200px) {
+            margin: 10px auto 0;
+            width: 416px;
+        }
     }
 }

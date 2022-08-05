@@ -8,6 +8,11 @@
 }
 
 .product {
+    @media screen and (min-width: 768px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
     &--image {
         position: relative;
         // height: calc(100vh - 80px - 80px);

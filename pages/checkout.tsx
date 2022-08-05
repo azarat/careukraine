@@ -70,7 +70,7 @@ const Checkout: NextPage = ({ setCart, cartData, cart }: any) => {
                                 const response = await fetch(endpoint, options)
                                 if (response.status === 200) {
                                     setCart([])
-                                    router.push('/')
+                                    router.push('/thankyou')
                                 }
                             }}
                             >

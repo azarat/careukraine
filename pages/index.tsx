@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import Head from 'next/head'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -10,13 +10,49 @@ import { connect } from 'react-redux';
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData, setCartData } from "../store/actions/cartAction";
 import { Dispatch } from 'redux';
+import * as mainImg from '../data/main-img.json'
+
+const useWindowSize = () => {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
 
 const Home: NextPage = ({ setCart, cartData, cart }: any) => {
-  const [ cartItems, setCartItems ] = useState();
+  const [ cartItems, setCartItems ] = useState([]);
+  const [ mainImgUrl, setMainImgUrl ] = useState(mainImg['window-sm']);
+  const [width, height] = useWindowSize();
 
   useEffect(() => {
     setCartItems(cart)
   }, [cart]);
+
+  useEffect(() => {
+    if (width < 768 && mainImgUrl != mainImg['window-sm']) {
+      setMainImgUrl(mainImg['window-sm'])
+    } else if (width >= 768 && width < 1200 && mainImgUrl != mainImg['window-xs']) {
+      setMainImgUrl(mainImg['window-xs'])
+    } else if (width >= 1200 && width < 1920 && mainImgUrl != mainImg['window-xl']) {
+      setMainImgUrl(mainImg['window-xl'])
+    } else if (width >= 1920 && mainImgUrl != mainImg['window-xxl']) {
+      setMainImgUrl(mainImg['window-xxl'])
+    }
+
+    // if (width <= 768 && mainImgUrl != mainImg['window-sm']) {
+    //   setMainImgUrl(mainImg['window-sm'])
+    // } else if (width <= 1200 && mainImgUrl != mainImg['window-xs']) {
+    //   setMainImgUrl(mainImg['window-xs'])
+    // } else if (width <= 1920 && mainImgUrl != mainImg['window-xl']) {
+    //   setMainImgUrl(mainImg['window-xl'])
+    // }
+  }, [width])
   
   return (
     <>
@@ -30,7 +66,7 @@ const Home: NextPage = ({ setCart, cartData, cart }: any) => {
       <main className='container--main'>
 
         <section className='container--section section--main'>
-          <Image src="/images/main-img.jpg" alt="" layout='fill' objectFit='contain' />
+          <Image src={mainImgUrl} alt="" layout='fill' objectFit='contain' />
         </section>
 
         <section className='container--section section--about'>
