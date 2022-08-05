@@ -34,10 +34,7 @@ const Home: NextPage = ({ setCart, cartData, cart }: any) => {
         </section>
 
         <section className='container--section section--about'>
-          <p onClick={() => {
-            setCart([1,1,2, 121])
-          }}>
-            {JSON.stringify(cartItems)}
+          <p>
             Care Ukraine<br />
             - This is a project, <br />
             the profit from which will go <br />

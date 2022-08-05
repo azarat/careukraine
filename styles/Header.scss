@@ -17,6 +17,21 @@
         flex: 1;
         display: flex;
         justify-content: flex-end;
+        position: relative;
+
+        &--count {
+            position: absolute;
+            background: #3edbfe;
+            color: #000000;
+            min-width: 20px;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0px 4px 1px;
+            bottom: -8px;
+            right: 14px;
+        }
     }
 
     &__goback {

@@ -8,30 +8,92 @@ import Image from 'next/image'
 import ProductImageSlider from '../../components/ProductImageSlider/ProductImageSlider'
 import ProductsSizes from '../../components/Products/ProductsSizes'
 import Loader from '../../components/Loader'
-import { ProductType } from '../../types/types'
+import { ProductType, CartProductType } from '../../types/types'
 import { _products } from "../../data/products.json"
+import { SET_CART, GET_CART, ERROR } from "../../store/types";
+import { connect } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData, setCartData } from "../../store/actions/cartAction";
+import { Dispatch } from 'redux';
 
-const Product: NextPage = () => {
+const Product: NextPage = ({ setCart, cartData, cart }: any) => {
   const router = useRouter()
   const { productAlias } = router.query
   const [product, setProduct] = useState<ProductType | null>(null)
   const [size, setSize] = useState<string>("")
+  const [touched, setTouched] = useState<boolean>(false)
+ 
+  const [ cartItems, setCartItems ] = useState<CartProductType[]>([]);
+
+  useEffect(() => {
+    setCartItems(cart)
+  }, [cart]);
+  
+  useEffect(()=>{
+    if (!!product) 
+        setSize(product.sizes[0])
+  }, [product])
+
+  useEffect(() => {
+    if (touched == true) {
+        const timer = window.setInterval(() => {
+            setTouched(false)
+        }, 1000);
+    
+        return () => { 
+            window.clearInterval(timer);
+        }
+    }
+  }, [touched])
 
   useEffect(()=>{
     const productsMatch = _products.filter((p) => p.alias == productAlias)
     if (productsMatch.length) setProduct(productsMatch[0])
   }, [productAlias])
 
-  const addToBag = () => {
-    
-  }
-
   if (product == null) {
     return (
-        <>
-            <Loader />
-        </>
+      <>
+        <Loader />
+      </>
     )
+  }
+
+  const addToBag = () => {
+    if (!size || size == "") {
+        console.log("Choose size!")
+        return false
+    }
+
+    const cartItemIndex = cartItems.findIndex((p: CartProductType) => {
+        return (p.alias == product.alias && p.size == size)
+    })
+
+    if (cartItemIndex == -1) {
+        setCart([
+            ...cartItems,
+            {
+               alias: product.alias,
+               name: product.name,
+               price: product.price,
+               images: product.images,
+               size: size,
+               quantity: 1
+            }
+        ])
+    } else {
+        let cartItemsModifying = [...cartItems]
+
+        let cartItemModifying = {
+            ...cartItemsModifying[cartItemIndex],
+            quantity: {...cartItemsModifying[cartItemIndex]}.quantity + 1
+        };
+
+        cartItemsModifying[cartItemIndex] = cartItemModifying
+
+        setCart(cartItemsModifying)
+    }
+
   }
 
   return (
@@ -78,7 +140,11 @@ const Product: NextPage = () => {
                                 currentSize={size} />
                         </div>
                         <div className='product--info__button'>
-                            <button className='product--add-to-cart' onClick={addToBag}>Add to bag</button>
+                            <button 
+                            className={`product--add-to-cart${touched ? " btn-pressed" : ""}`} 
+                            onMouseDown={() => setTouched(true)}
+                            onMouseUp={() => setTouched(false)}
+                            onClick={addToBag}>Add to bag</button>
                         </div>
                         <div className='product--info__description'>
                             <span className='product--info__description--label'>Description</span>
@@ -120,4 +186,21 @@ const Product: NextPage = () => {
   )
 }
 
-export default Product
+function mapStateToProps(store: any) {
+    const { cartData } = store;
+    return { cart: cartData.cart };
+}
+  
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    getCart: () => dispatch({
+      type: GET_CART
+    }),
+    setCart: (data: any) => dispatch({
+      type: SET_CART,
+      payload: data,
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Product)

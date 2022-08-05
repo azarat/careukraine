@@ -18,3 +18,11 @@ export declare type ProductType = {
     images: ProductImagesType[]
 }
 
+export declare type CartProductType = {
+    name: string
+    alias: string
+    price: number
+    size: string
+    images: ProductImagesType[]
+    quantity: number
+}

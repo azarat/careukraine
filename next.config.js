@@ -3,6 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
+  env: {
+    botKey: '5465652769:AAHggdAM5Uh9_pZhG0SzyKY9KtQS-MBN2co',
+  },
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,

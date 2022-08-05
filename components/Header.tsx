@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import LogoSVG from './svg/Logo.svg';
 import CartSVG from './svg/Cart.svg';
 import ChevronLeft2SVG from './svg/ChevronLeft2.svg'
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux';
 
 interface HeaderProps {
   goBack?: boolean
@@ -11,6 +13,12 @@ interface HeaderProps {
 
 const Header = ({ goBack, hideCart, title }: HeaderProps) => {
   const router = useRouter()
+  const [ cartItems, setCartItems ] = useState([]);
+  const cartSelector = useSelector((state: any) => state.cartData.cart)
+
+  useEffect(() => {
+    setCartItems(cartSelector)
+  }, [cartSelector])
 
   return (
     <header className={`header${
@@ -33,6 +41,7 @@ const Header = ({ goBack, hideCart, title }: HeaderProps) => {
       {hideCart !== true &&
         <div className='header__cart' onClick={() => router.push('/cart')}>
           <CartSVG />
+          <div className='header__cart--count'>{!!cartItems ? cartItems.length : 0}</div>
         </div>
       }
     </header>
