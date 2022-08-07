@@ -4,7 +4,6 @@ import Head from 'next/head'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import ProductImageSlider from '../../components/ProductImageSlider/ProductImageSlider'
 import ProductsSizes from '../../components/Products/ProductsSizes'
 import Loader from '../../components/Loader'
@@ -15,6 +14,8 @@ import { connect } from 'react-redux';
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData, setCartData } from "../../store/actions/cartAction";
 import { Dispatch } from 'redux';
+import ProductImageBig from '../../components/ProductImageSlider/ProductImageBig'
+import ProductImageBigSlider from '../../components/ProductImageSlider/ProductImageBigSlider'
 
 const useWindowSize = () => {
     const [size, setSize] = useState([0, 0]);
@@ -137,12 +138,17 @@ const Product: NextPage = ({ setCart, cartData, cart }: any) => {
 
                 <div className='product'>
                     <div className='product--image'>
-                        {width < 768 && 
+                        {width < 768 ? 
                             <ProductImageSlider images={product.images} />
+                            :
+                            <ProductImageBig image={product.images[0].url} />
                         }
                     </div>
 
                     <div className='product--info'>
+                        {width >= 768 &&
+                            <ProductImageBigSlider images={product.images} />
+                        }
                         <div className='product--info__name'>
                             {product.name}
                         </div>
