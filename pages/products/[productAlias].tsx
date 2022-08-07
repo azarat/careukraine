@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import ProductImageSlider from '../../components/ProductImageSlider/ProductImageSlider'
 import ProductsSizes from '../../components/Products/ProductsSizes'
 import Loader from '../../components/Loader'
-import { ProductType, CartProductType } from '../../types/types'
+import { ProductType, CartProductType, ProductImagesType } from '../../types/types'
 import { _products } from "../../data/products.json"
 import { SET_CART, GET_CART, ERROR } from "../../store/types";
 import { connect } from 'react-redux';
@@ -36,6 +36,7 @@ const Product: NextPage = ({ setCart, cartData, cart }: any) => {
   const { productAlias } = router.query
   const [product, setProduct] = useState<ProductType | null>(null)
   const [size, setSize] = useState<string>("")
+  const [bigImg, setBigImg] = useState<string>("")
   const [touched, setTouched] = useState<boolean>(false)
  
   const [ cartItems, setCartItems ] = useState<CartProductType[]>([]);
@@ -63,7 +64,10 @@ const Product: NextPage = ({ setCart, cartData, cart }: any) => {
 
   useEffect(()=>{
     const productsMatch = _products.filter((p) => p.alias == productAlias)
-    if (productsMatch.length) setProduct(productsMatch[0])
+    if (productsMatch.length) {
+        setProduct(productsMatch[0])
+        setBigImg(productsMatch[0].images[0].url)
+    } 
   }, [productAlias])
 
   if (product == null) {
@@ -141,13 +145,13 @@ const Product: NextPage = ({ setCart, cartData, cart }: any) => {
                         {width < 768 ? 
                             <ProductImageSlider images={product.images} />
                             :
-                            <ProductImageBig image={product.images[0].url} />
+                            <ProductImageBig image={bigImg} />
                         }
                     </div>
 
                     <div className='product--info'>
                         {width >= 768 &&
-                            <ProductImageBigSlider images={product.images} />
+                            <ProductImageBigSlider images={product.images} onImageClick={(img: ProductImagesType) => setBigImg(img.url)} />
                         }
                         <div className='product--info__name'>
                             {product.name}

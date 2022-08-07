@@ -7,9 +7,10 @@ import ChevronRightSVG from '../svg/ChevronRight.svg'
 
 interface ProductImageBigSliderProps {
     images: ProductImagesType[]
+    onImageClick: any
 }
 
-const ProductImageBigSlider = ({images}: ProductImageBigSliderProps) => {
+const ProductImageBigSlider = ({images, onImageClick}: ProductImageBigSliderProps) => {
     const NextArrow = (props: any) => {
         const { className, style, onClick } = props;
         return (
@@ -46,7 +47,7 @@ const ProductImageBigSlider = ({images}: ProductImageBigSliderProps) => {
         <div className="product-image-slider--big">
             <Slider {...settings}>
                 {!!images && images.length && images.map((img) => 
-                    <ProductImageBigSliderItem image={img} key={img.url} />
+                    <ProductImageBigSliderItem image={img} key={img.url} onImageClick={onImageClick} />
                 )}
             </Slider>
         </div>
